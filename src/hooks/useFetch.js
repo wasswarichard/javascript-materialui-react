@@ -13,7 +13,16 @@ const useFetch = () => {
          .then((response) => response.json())
          .then(
             (result) => {
-               setData(result);
+               const payload = result.sort((a, b) => {
+                  if (parseInt(a.transactionDate) > parseInt(b.transactionDate)) {
+                     return 1;
+                  }
+                  if (parseInt(a.transactionDate) < parseInt(b.transactionDate)) {
+                     return -1;
+                  }
+                  return 0;
+               });
+               setData(payload);
             },
             (error) => setError(error)
          )
